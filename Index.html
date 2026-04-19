@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Songbridge Market — Where AI Bridges the Gap</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#080b12;--surf:#0f1420;--card:#141926;--bdr:#1e2535;
+  --blue:#3d8ef8;--bluedim:rgba(61,142,248,.1);--blueglow:rgba(61,142,248,.2);
+  --ai:#e8743b;--aidim:rgba(232,116,59,.12);--aiglow:rgba(232,116,59,.22);
+  --ok:#3df8a0;--txt:#e8edf8;--muted:#6b7a99;--dim:#2e3a52;
+}
+body{background:var(--bg);color:var(--txt);font-family:'Helvetica Neue',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+nav{position:sticky;top:0;z-index:100;background:rgba(8,11,18,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.wordmark{font-size:1.2rem;font-weight:800;color:var(--txt);text-decoration:none;letter-spacing:-.03em}
+.wordmark span{color:var(--blue)}
+.nav-cta{background:var(--blue);color:#fff;font-weight:700;font-size:.85rem;padding:9px 20px;border-radius:8px;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 0 80px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:30%;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,var(--blueglow),transparent 70%);pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:760px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--aidim);border:1px solid rgba(232,116,59,.3);border-radius:100px;padding:6px 14px;font-size:.72rem;font-weight:700;color:var(--ai);letter-spacing:.08em;text-transform:uppercase;margin-bottom:28px}
+.eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--ai);box-shadow:0 0 8px var(--ai);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:clamp(2.6rem,6.5vw,5rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:24px;color:var(--txt)}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:var(--muted);max-width:560px;margin-bottom:40px;line-height:1.7}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--blue);color:#fff;font-weight:700;font-size:.95rem;padding:14px 30px;border-radius:10px;text-decoration:none;box-shadow:0 0 28px var(--blueglow);display:inline-block;transition:transform .15s}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--bdr);color:var(--muted);font-weight:600;font-size:.95rem;padding:14px 30px;border-radius:10px;text-decoration:none;display:inline-block;transition:color .15s}
+.btn-ghost:hover{color:var(--txt)}
+.stats{border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:44px 0;margin-bottom:80px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:32px;text-align:center}
+.stat-n{font-size:2rem;font-weight:800;color:var(--txt);letter-spacing:-.04em}
+.stat-l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.section{padding:90px 0}
+.section-eye{font-size:.7rem;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.section h2{font-size:clamp(1.7rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;color:var(--txt);margin-bottom:14px;line-height:1.15}
+.section-sub{font-size:1rem;color:var(--muted);max-width:500px;margin-bottom:52px;line-height:1.7}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.step{background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:26px;transition:border-color .2s}
+.step:hover{border-color:var(--blue)}
+.step-ico{font-size:1.7rem;margin-bottom:12px}
+.step-n{font-size:.65rem;font-weight:800;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.step h3{font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:7px}
+.step p{font-size:.85rem;color:var(--muted);line-height:1.6}
+.ai-sect{padding:70px 0}
+.ai-card{background:var(--card);border:1px solid rgba(232,116,59,.28);border-radius:20px;padding:48px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;position:relative;overflow:hidden}
+.ai-card::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,var(--aiglow),transparent 70%);pointer-events:none}
+.ai-badge{display:inline-flex;align-items:center;gap:7px;background:var(--aidim);border:1px solid rgba(232,116,59,.28);border-radius:100px;padding:5px 12px;font-size:.68rem;font-weight:700;color:var(--ai);letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.ai-card h2{font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:800;letter-spacing:-.03em;color:var(--txt);margin-bottom:14px;line-height:1.2}
+.ai-card>div>p{font-size:.95rem;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.ai-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ai-list li{display:flex;gap:10px;font-size:.86rem;color:var(--muted);line-height:1.5}
+.ai-list li::before{content:'→';color:var(--ai);font-weight:700;flex-shrink:0}
+.widget{background:var(--surf);border:1px solid var(--bdr);border-radius:13px;padding:18px;position:relative;z-index:1}
+.widget-hdr{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bdr)}
+.widget-dot{width:8px;height:8px;border-radius:50%;background:var(--ai);box-shadow:0 0 7px var(--ai)}
+.widget-lbl{font-size:.68rem;font-weight:700;color:var(--ai);letter-spacing:.07em;text-transform:uppercase}
+.widget-row{background:var(--card);border-radius:8px;padding:11px 13px;margin-bottom:9px}
+.widget-key{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.widget-val{font-size:.86rem;color:var(--txt);font-weight:600}
+.widget-val.orange{color:var(--ai)}
+.widget-val.green{color:var(--ok)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.feat-card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:26px;transition:border-color .2s,transform .2s}
+.feat-card:hover{border-color:var(--dim);transform:translateY(-3px)}
+.feat-ico{font-size:1.5rem;margin-bottom:12px}
+.feat-card h3{font-size:.95rem;font-weight:700;color:var(--txt);margin-bottom:7px}
+.feat-card p{font-size:.84rem;color:var(--muted);line-height:1.6}
+.ai-tag{display:inline-block;background:var(--aidim);border:1px solid rgba(232,116,59,.22);color:var(--ai);font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-bottom:8px}
+.roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.role-card{background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:32px}
+.role-tag{font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.role-tag.s{color:var(--blue)}.role-tag.b{color:var(--ok)}
+.role-card h3{font-size:1.3rem;font-weight:800;color:var(--txt);margin-bottom:8px;letter-spacing:-.02em}
+.role-card p{font-size:.86rem;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.role-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.role-list li{font-size:.84rem;color:var(--muted);display:flex;gap:8px}
+.role-card.s .role-list li::before{content:'♩';color:var(--blue)}
+.role-card.b .role-list li::before{content:'♪';color:var(--ok)}
+.cta-sect{padding:90px 0;text-align:center}
+.cta-inner{background:var(--card);border:1px solid var(--bdr);border-radius:22px;padding:68px 36px;position:relative;overflow:hidden}
+.cta-inner::before{content:'';position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:500px;height:260px;background:radial-gradient(ellipse,var(--blueglow),transparent 70%);pointer-events:none}
+.cta-inner h2{font-size:clamp(1.7rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.03em;color:var(--txt);margin-bottom:14px}
+.cta-inner p{color:var(--muted);font-size:1rem;margin-bottom:32px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+footer{border-top:1px solid var(--bdr);padding:36px 0}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.foot-copy{font-size:.82rem;color:var(--muted)}
+.foot-links{display:flex;gap:22px}
+.foot-links a{font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .15s}
+.foot-links a:hover{color:var(--txt)}
+@media(max-width:768px){
+  .ai-card{grid-template-columns:1fr;gap:32px;padding:28px}
+  .roles-grid{grid-template-columns:1fr}
+  .foot-inner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="wordmark">Songbridge <span>Market</span></a>
+    <a href="#signup" class="nav-cta">Get Early Access</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="eyebrow"><div class="eyebrow-dot"></div>AI-Powered Music Marketplace</div>
+      <h1>Where AI <em>bridges the gap</em><br>between the writer<br>and the artist</h1>
+      <p class="hero-sub">Songbridge Market connects independent songwriters directly with artists and producers — with AI that sorts your songs, matches them to the right buyer, and helps you close the deal.</p>
+      <div class="hero-btns">
+        <a href="#signup" class="btn-primary">Get Early Access</a>
+        <a href="#how-it-works" class="btn-ghost">See How It Works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div><div class="stat-n">$0</div><div class="stat-l">To list your song</div></div>
+      <div><div class="stat-n">10–20%</div><div class="stat-l">Commission per sale</div></div>
+      <div><div class="stat-n">AI</div><div class="stat-l">Sorts & matches only</div></div>
+      <div><div class="stat-n">100%</div><div class="stat-l">Your rights, your call</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="how-it-works">
+  <div class="container">
+    <div class="section-eye">How it works</div>
+    <h2>Simple. Fast. Protected.</h2>
+    <p class="section-sub">Upload your song, let AI sort and match it, connect directly with the right buyer.</p>
+    <div class="steps">
+      <div class="step"><div class="step-ico">🎵</div><div class="step-n">Step 01</div><h3>Upload Your Song</h3><p>Add your track with title, price, genre, and audio link. Confirm ownership — protected from day one.</p></div>
+      <div class="step"><div class="step-ico">🤖</div><div class="step-n">Step 02</div><h3>AI Sorts & Matches</h3><p>Get a recommended price, the ideal target artist, and one selling tip. No music creation — ever.</p></div>
+      <div class="step"><div class="step-ico">🛒</div><div class="step-n">Step 03</div><h3>List on the Marketplace</h3><p>Buyers browse, get one watermarked preview, and request full access. Boosted listings get priority.</p></div>
+      <div class="step"><div class="step-ico">📄</div><div class="step-n">Step 04</div><h3>License & Close</h3><p>Pick non-exclusive or exclusive — a binding agreement is auto-generated. Message to finalize payment.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ai-sect">
+  <div class="container">
+    <div class="ai-card">
+      <div>
+        <div class="ai-badge">⚡ AI-Powered</div>
+        <h2>Smarter pricing.<br>Better matches.</h2>
+        <p>Don't guess what your song is worth. Songbridge Market's AI — powered by Claude — analyzes your track and pushes it to the right artist. It sorts. It matches. It never writes a single note.</p>
+        <ul class="ai-list">
+          <li>Recommended price range based on genre & market</li>
+          <li>Target artist profile — exactly who should buy this</li>
+          <li>One actionable tip to make your listing sell faster</li>
+          <li>Zero music generation — your creativity stays yours</li>
+        </ul>
+      </div>
+      <div class="widget">
+        <div class="widget-hdr"><div class="widget-dot"></div><span class="widget-lbl">AI Suggestion — "Midnight Drive"</span></div>
+        <div class="widget-row"><div class="widget-key">Suggested Price</div><div class="widget-val orange">$350 – $500</div></div>
+        <div class="widget-row"><div class="widget-key">Target Artist</div><div class="widget-val">Mid-tier R&amp;B artists seeking emotionally driven pop crossover material.</div></div>
+        <div class="widget-row"><div class="widget-key">Tip to Sell Faster</div><div class="widget-val green">Add a short voice memo describing the story — buyers connect with origin stories.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-eye">Platform Features</div>
+    <h2>Everything you need<br>to buy and sell music.</h2>
+    <p class="section-sub">Built for real transactions between real creators — not just streaming.</p>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-ico">🔐</div><h3>Ownership Protection</h3><p>Legal declarations required at upload. Full responsibility transfers to the uploader — you and the platform stay protected.</p></div>
+      <div class="feat-card"><div class="feat-ico">▶️</div><h3>Watermarked Previews</h3><p>Buyers get one preview before requesting full access. Your song is protected until the deal is done.</p></div>
+      <div class="feat-card"><div class="feat-ico">📝</div><h3>Private Lyrics Notepad</h3><p>Songwriters get a private, AI-free space to store lyrics and ideas. No AI reads or touches your words — ever.</p></div>
+      <div class="feat-card"><div class="feat-ico">💬</div><h3>Direct Messaging</h3><p>No middlemen. Buyers and sellers message each other directly on-platform, per song.</p></div>
+      <div class="feat-card"><div class="feat-ico">📄</div><h3>Auto License Agreements</h3><p>Non-exclusive or exclusive — a binding license is generated and saved automatically at point of purchase.</p></div>
+      <div class="feat-card"><div class="feat-ico">⭐</div><h3>Boost Listings</h3><p>Feature your song at the top of the marketplace for more visibility and faster sales.</p></div>
+      <div class="feat-card"><div class="feat-ico">🎤</div><div class="ai-tag">AI — Coming Soon</div><h3>AI Song Matching</h3><p>AI will match your songs to artists actively searching for tracks in your genre.</p></div>
+      <div class="feat-card"><div class="feat-ico">💳</div><h3>Secure Payments</h3><p>Stripe integration coming soon. Sellers paid directly — 10–20% platform commission per sale.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-eye">Who it's for</div>
+    <h2>Two sides.<br>One marketplace.</h2>
+    <div class="roles-grid">
+      <div class="role-card s">
+        <div class="role-tag s">For Songwriters</div>
+        <h3>Sell your songs directly.</h3>
+        <p>You wrote it. You own it. Now get paid — no label deal or sync agent required.</p>
+        <ul class="role-list">
+          <li>Upload songs with audio and metadata</li>
+          <li>Set your own price</li>
+          <li>Get AI pricing & targeting help</li>
+          <li>Keep lyrics private in your notepad</li>
+          <li>Boost listings for more visibility</li>
+          <li>Message buyers directly</li>
+        </ul>
+      </div>
+      <div class="role-card b">
+        <div class="role-tag b">For Artists & Producers</div>
+        <h3>Find the perfect song.</h3>
+        <p>Real songs from real songwriters — not stock music. Find what fits your sound.</p>
+        <ul class="role-list">
+          <li>Browse a curated song marketplace</li>
+          <li>Preview before committing</li>
+          <li>Request full access from the seller</li>
+          <li>Message and negotiate directly</li>
+          <li>Accept non-exclusive or exclusive license</li>
+          <li>Auto-generated binding agreement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sect" id="signup">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Get early access.</h2>
+      <p>Songbridge Market is launching soon. Join the waitlist and be first in.</p>
+      <div class="cta-btns">
+        <a href="mailto:hello@songbridgeai.com?subject=Early Access Request" class="btn-primary">Request Early Access</a>
+        <a href="mailto:hello@songbridgeai.com" class="btn-ghost">Contact Us</a>
+      </div>
+      <p style="margin-top:18px;font-size:.78rem;color:var(--muted)">songbridgeai.com &nbsp;·&nbsp; hello@songbridgeai.com</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot-inner">
+    <div class="foot-copy">© 2025 Songbridge Market. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="mailto:hello@songbridgeai.com">Contact</a>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+                          </html>
+
+                        
